@@ -40,7 +40,6 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.SearchView
 import android.view.*
-import com.raywenderlich.android.imet.IMetApp
 import com.raywenderlich.android.imet.R
 import com.raywenderlich.android.imet.data.model.People
 import com.raywenderlich.android.imet.ui.add.AddPeopleActivity
@@ -76,6 +75,9 @@ class PeoplesListFragment : Fragment(),
     populatePeopleList(people)
   }
   */
+
+  //don’t need to fetch data every time the Fragment resumes; ViewModel will take care of that
+  /*
   override fun onResume() {
     super.onResume()
 
@@ -84,12 +86,20 @@ class PeoplesListFragment : Fragment(),
     peopleRepository.getAllPeople().observe(this, Observer { peopleList ->
       populatePeopleList(peopleList!!)
     })
-  }
+  }*/
 
   override fun onCreateView(
       inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?
   ): View? {
+
+    // Start observing people list
+    viewModel.getPeopleList().observe(this, Observer<List<People>> { peoples ->
+      peoples?.let {
+        populatePeopleList(peoples)
+      }
+    })
+
     return inflater.inflate(R.layout.fragment_peoples_list, container, false)
   }
 
