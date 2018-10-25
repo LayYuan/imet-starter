@@ -42,6 +42,10 @@ class PeopleRepository(application: Application) {
     return peopleDao.find(id)
   }
 
+  fun findPeople(name: String): LiveData<List<People>> {
+    return peopleDao.findBy(name)
+  }
+
   /*
   /**
    * Returns the list of all people in reverse order (latest on top)

@@ -34,4 +34,8 @@ interface PeopleDao {
     @Query("SELECT * FROM People WHERE id = :id")
     fun find(id: Int): People
 
+    //to query People by name from the database:
+    @Query("SELECT * FROM People WHERE name LIKE '%' || :name || '%'")
+    fun findBy(name: String): LiveData<List<People>>
+
 }
