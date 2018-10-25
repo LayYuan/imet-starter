@@ -33,6 +33,7 @@
 
 package com.raywenderlich.android.imet.ui.list
 
+import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -60,11 +61,22 @@ class PeoplesListFragment : Fragment(),
     setHasOptionsMenu(true)
   }
 
+  /*
   override fun onResume() {
     super.onResume()
 
     val people = (activity?.application as IMetApp).getPeopleRepository().getAllPeople()
     populatePeopleList(people)
+  }
+  */
+  override fun onResume() {
+    super.onResume()
+
+    // Observe people list
+    val peopleRepository = (activity?.application as IMetApp).getPeopleRepository()
+    peopleRepository.getAllPeople().observe(this, Observer { peopleList ->
+      populatePeopleList(peopleList!!)
+    })
   }
 
   override fun onCreateView(

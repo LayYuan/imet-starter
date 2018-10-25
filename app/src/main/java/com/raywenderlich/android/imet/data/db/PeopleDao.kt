@@ -1,5 +1,6 @@
 package com.raywenderlich.android.imet.data.db
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
@@ -16,7 +17,10 @@ interface PeopleDao {
 
     // 1: Select All
     @Query("SELECT * FROM People ORDER BY id DESC")
-    fun getAll(): List<People>
+    //fun getAll(): List<People>
+
+    //Now your app can observe changes in the model with very little effort!
+    fun getAll(): LiveData<List<People>>
 
     // 2: Insert
     @Insert(onConflict = OnConflictStrategy.REPLACE)
