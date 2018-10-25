@@ -36,6 +36,7 @@ package com.raywenderlich.android.imet.ui.add
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.*
+import androidx.navigation.Navigation
 import com.raywenderlich.android.imet.IMetApp
 import com.raywenderlich.android.imet.R
 import com.raywenderlich.android.imet.data.model.People
@@ -85,7 +86,8 @@ class AddPeopleFragment : Fragment() {
     )
     (activity?.application as IMetApp).getPeopleRepository().insertPeople(people)
 
-    activity?.finish()
+    //activity?.finish()
+    Navigation.findNavController(view!!).navigateUp()
   }
 
 }

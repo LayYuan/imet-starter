@@ -40,9 +40,9 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.SearchView
 import android.view.*
+import androidx.navigation.findNavController
 import com.raywenderlich.android.imet.R
 import com.raywenderlich.android.imet.data.model.People
-import com.raywenderlich.android.imet.ui.add.AddPeopleActivity
 import com.raywenderlich.android.imet.ui.details.PeopleDetailsActivity
 import kotlinx.android.synthetic.main.fragment_peoples_list.*
 
@@ -118,8 +118,11 @@ class PeoplesListFragment : Fragment(),
 
     // Navigate to add people
     addFab.setOnClickListener {
-      val addPeopleIntent = Intent(context, AddPeopleActivity::class.java)
-      startActivity(addPeopleIntent)
+      view.findNavController().navigate(
+              R.id.action_peoplesListFragment_to_addPeopleFragment3)
+
+     // val addPeopleIntent = Intent(context, AddPeopleActivity::class.java)
+      //startActivity(addPeopleIntent)
     }
   }
 
